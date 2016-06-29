@@ -1,0 +1,21 @@
+///
+/// Variants for alerts
+/// @alias Mixins
+/// Variants for alerts
+/// @param {String} $background - color for background alert
+/// @param {String} $border - color for border alert
+/// @param {String} $text-color - text color for alert
+///
+
+@mixin alert-variant($background, $border, $text-color) {
+  background-color: $background;
+  border-color: $border;
+  color: $text-color;
+
+  hr {
+    border-top-color: darken($border, 5%);
+  }
+  .alert-link {
+    color: darken($text-color, 10%);
+  }
+}

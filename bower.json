@@ -1,0 +1,19 @@
+{
+  "name": "cybetsport",
+  "version": "0.0.1",
+  "authors": [
+    "Ksenia Lomova <byhachi11@gmail.com>"
+  ],
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "bootstrap-sass": "~3.3.5",
+    "jquery": "~2.1.0"
+  }
+}
