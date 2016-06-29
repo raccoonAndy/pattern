@@ -1,10 +1,10 @@
 {
-  "name": "cybetsport",
+  "name": "pattern",
   "version": "0.0.1",
-  "description": "test site",
+  "description": "готовый шаблон для проектов",
   "repository": {
     "type": "git",
-    "url": "https://github.com/raccoonAndy/csport"
+    "url": "https://github.com/raccoonAndy/pattern"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,8 +13,13 @@
   "license": "ISC",
   "devDependencies": {
     "grunt": "^0.4.5",
+    "grunt-browser-sync": "^2.2.0",
+    "grunt-concurrent": "^2.3.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-imagemin": "^1.0.1",
     "grunt-contrib-uglify": "^0.9.2",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-csscomb": "^3.1.0",
     "grunt-postcss": "^0.8.0",
     "grunt-sass": "^1.0.0",
     "grunt-sassdoc": "^2.0.2"
