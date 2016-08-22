@@ -1,5 +1,7 @@
-# Шаблон для проектов (grunt/bower/sassdoc)
+# стартовый шаблон для моих проектов (grunt/bower)
 
-Готовые gruntfile.js и bower.json для фронтенд-разработки
+bower install
 
-Добавление документации через sassdoc
+npm i
+
+npm install grunt-postcss pixrem autoprefixer cssnano postcss-color-rgba-fallback postcss-opacity
