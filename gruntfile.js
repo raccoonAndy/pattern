@@ -134,26 +134,6 @@ module.exports = function(grunt){
                 files: ['assets/src/img/**/*.png', 'assets/src/img/**/*.jpg', 'assets/src/img/**/*.gif', 'assets/src/img/**/*.svg'],
                 tasks: ['imagemin']
             }
-        },
-
-        //for documentation sass codes
-        sassdoc: {
-            srcs: {
-                src: ['assets/src/scss/*.scss', 'assets/src/scss/partials/*.scss', 'bower_components/bootstrap-sass/assets/stylesheets/**/*.scss']
-            }
-        },
-
-        //setup browserSync
-        browserSync: {
-            bsFiles: {
-                src : ['assets/src/scss/*.scss','public/css/*.css', 'assets/template/*.html']
-            },
-            options: {
-                server: {
-                    watchTask: true,
-                    baseDir: "./"
-                }
-            }
         }
 	});
 
@@ -167,10 +147,8 @@ module.exports = function(grunt){
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-spritesmith');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
-    grunt.loadNpmTasks('grunt-sassdoc');
-    grunt.loadNpmTasks('grunt-browser-sync');
 
 	// Register task(s)
-	grunt.registerTask('default', ['watch','uglify:dev','sass:dev','postcss','sassdoc','sprite','imagemin','browserSync']);
+	grunt.registerTask('default', ['watch','uglify:dev','sass:dev','postcss','sprite','imagemin']);
 	grunt.registerTask('build', ['uglify:build', 'sass:build']);
 };
