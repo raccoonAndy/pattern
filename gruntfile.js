@@ -3,17 +3,21 @@ module.exports = function(grunt){
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
+	jade: {
+            html: {
+                files: {
+                    'public/template/': ['assets/template/*.jade']
+                },
+                options: {
+                    pretty: true,
+                    client: false
+                }
+            }
+        },
+        
         postcss: {
             options: {
                 processors: [
-                    require('stylelint')({
-                        "extends": "stylelint-config-standard",
-                        "rules": {
-                            "indentation": "tab",
-                            "number-leading-zero": null,
-                            "unit-whitelist": ["em", "rem", "s"]
-                        }
-                    }),
                     require('autoprefixer')({browsers: ['> 0.5%', 'last 2 version','ie 6-8']}),
                     require('cssnano'),
                     require('postcss-color-rgba-fallback')(),
@@ -89,7 +93,35 @@ module.exports = function(grunt){
                 padding: 10
             }
         },
-
+        
+        // svg-sprite configuration
+        svg_sprite: {
+            all: {
+                src: 'assets/src/sprites/*.svg',
+                dest: 'public/img/svg',
+                options: {
+                    "dest": ".",
+                    "shape": {
+                        "spacing": {
+                            "padding": 20
+                        }
+                    },
+                    "mode": {
+                        "css": {
+                            "dest": "assets/src/scss",
+                            "common": "icon",
+                            "prefix": ".icon-%s",
+                            "dimensions": "-size",
+                            "sprite": "../../../assets/src/img/svg/sprites.svg",
+                            "render": {
+                                "scss": true
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        
         //setup imagemin
         imagemin: {
             all: {
@@ -114,21 +146,25 @@ module.exports = function(grunt){
 
         // setup watch task
         watch: {
-            js: {
-                files: ['bower_components/**/*.js', 'assets/src/js/*.js'],
-                tasks: ['uglify:dev']
-            },
-            sass: {
-                files: ['assets/src/scss/**/*.scss', 'bower_components/**/*.scss'],
-                tasks: ['sass:dev']
+            jade: {
+                files: ['assets/template/**/*.jade'],
+                tasks: ['jade']
             },
             css: {
                 files: ['assets/src/scss/style.scss'],
                 tasks: ['postcss']
             },
+            sass: {
+                files: ['assets/src/scss/**/*.scss'],
+                tasks: ['sass:dev']
+            },
             sprites: {
                 files: ['assets/src/sprites/*.png'],
                 tasks: ['sprite']
+            },
+            svg_sprites: {
+                files: ['assets/src/sprites/*.svg'],
+                tasks: ['svg_sprite']
             },
             img: {
                 files: ['assets/src/img/**/*.png', 'assets/src/img/**/*.jpg', 'assets/src/img/**/*.gif', 'assets/src/img/**/*.svg'],
@@ -139,16 +175,18 @@ module.exports = function(grunt){
 
 	// Load the plugins
     grunt.loadNpmTasks('grunt-concurrent');
+    grunt.loadNpmTasks('grunt-jade');
     grunt.loadNpmTasks('grunt-postcss');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-sass');
     grunt.loadNpmTasks('grunt-csscomb');
-	grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-spritesmith');
+    grunt.loadNpmTasks('grunt-svg-sprite');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
 
-	// Register task(s)
-	grunt.registerTask('default', ['watch','uglify:dev','sass:dev','postcss','sprite','imagemin']);
-	grunt.registerTask('build', ['uglify:build', 'sass:build']);
+    // Register task(s)
+    grunt.registerTask('default', ['watch','jade','sass:dev','postcss','sprite','svg_sprite','imagemin']);
+    grunt.registerTask('build', ['jade', 'sass:build']);
 };
