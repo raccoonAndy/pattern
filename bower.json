@@ -14,6 +14,7 @@
   ],
   "devDependencies": {
     "bootstrap-sass": "~3.3.5",
+    "bootstrap": "v4.0.0-alpha.6",
     "jquery": "~2.1.0"
   }
 }
